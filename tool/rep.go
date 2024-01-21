@@ -3,8 +3,8 @@ package tool
 import "getneko/structtypes"
 
 // 返回错误结果
-func Refal(msg string) *structtypes.JSONResult {
-	return &structtypes.JSONResult{Code: -1, Message: msg, Data: nil}
+func Refal(code int, msg string) *structtypes.JSONResult {
+	return &structtypes.JSONResult{Code: code, Message: msg, Data: nil}
 }
 
 // 返回正常结果
