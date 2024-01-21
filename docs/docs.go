@@ -51,6 +51,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/userlogin": {
+            "post": {
+                "description": "用户登陆api",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户操作"
+                ],
+                "summary": "用户登陆",
+                "parameters": [
+                    {
+                        "description": "user info",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structtypes.UserLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v1/userreg": {
             "post": {
                 "description": "用户注册api",
@@ -107,6 +153,25 @@ const docTemplate = `{
                 },
                 "data": {},
                 "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.UserLogin": {
+            "type": "object",
+            "required": [
+                "language",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "language": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
                     "type": "string"
                 }
             }
