@@ -33,7 +33,10 @@ func init() {
 	sqlDB.SetConnMaxLifetime(time.Hour)
 
 	//迁移数据库
-	ORMDB.AutoMigrate(&structtypes.User{})
-
-	log.Info("Database connection initialization successful")
+	err := ORMDB.AutoMigrate(&structtypes.User{})
+	if err != nil {
+		log.Error("Database connection initialization failed", err.Error())
+	} else {
+		log.Info("Database connection initialization successful")
+	}
 }

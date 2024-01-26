@@ -16,5 +16,8 @@ func main() {
 
 	r := router.Router()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run()
+	err := r.Run()
+	if err != nil {
+		panic(err)
+	}
 }
