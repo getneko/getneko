@@ -42,7 +42,7 @@ func TestUerregcontroller(t *testing.T) {
 	assert.Equal(t, 400, w.Code)
 	json.Unmarshal(w.Body.Bytes(), &res)
 	assert.Equal(t, -2, res.Code)
-	assert.Equal(t, "Username or password already exists", res.Message)
+	assert.Equal(t, "Username or email already exists", res.Message)
 	//参数不符合规范
 	w = httptest.NewRecorder()
 	req, _ = http.NewRequest(http.MethodPost, "/v1/userreg", strings.NewReader(`{
