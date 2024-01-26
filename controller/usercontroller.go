@@ -27,7 +27,7 @@ func Uerregcontroller(c *gin.Context) {
 	var users structtypes.User
 	err := db.ORMDB.Where("Username = ? or Email = ?", userregreq.Username, userregreq.Email).First(&users).Error
 	if err == nil {
-		c.JSON(400, tool.Refal(-2, "Username or password already exists"))
+		c.JSON(400, tool.Refal(-2, "Username or email already exists"))
 		return
 	}
 	//生成盐
