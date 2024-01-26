@@ -31,9 +31,9 @@ func Uerregcontroller(c *gin.Context) {
 		return
 	}
 	//生成盐
-	salts := tool.GetRandString(10)
+	salts, err := tool.GetRandString(10)
 	//生成令牌
-	tokens := tool.GetRandString(30)
+	tokens, err := tool.GetRandString(30)
 	//加密密码
 	pass := tool.GetSha256(salts + userregreq.Password)
 	//写入数据库
@@ -69,7 +69,7 @@ func UerLogincontroller(c *gin.Context) {
 		return
 	}
 	// 更新表
-	newtoken := tool.GetRandString(30)
+	newtoken, err := tool.GetRandString(30)
 	users.Token = newtoken
 	users.Language = userlogin.Language
 	db.ORMDB.Save(&users)
