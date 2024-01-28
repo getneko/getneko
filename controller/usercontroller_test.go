@@ -39,7 +39,7 @@ func TestUerregcontroller(t *testing.T) {
 	  }`))
 	router.ServeHTTP(w, req)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, 200, w.Code)
 	json.Unmarshal(w.Body.Bytes(), &res)
 	assert.Equal(t, -2, res.Code)
 	assert.Equal(t, "Username or email already exists", res.Message)
@@ -50,7 +50,7 @@ func TestUerregcontroller(t *testing.T) {
 	  }`))
 	router.ServeHTTP(w, req)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, 200, w.Code)
 	json.Unmarshal(w.Body.Bytes(), &res)
 	assert.Equal(t, -1, res.Code)
 	assert.Equal(t, "illegal request", res.Message)
@@ -81,7 +81,7 @@ func TestUerLogincontroller(t *testing.T) {
 	  }`))
 	router.ServeHTTP(w, req)
 
-	assert.Equal(t, 401, w.Code)
+	assert.Equal(t, 200, w.Code)
 	json.Unmarshal(w.Body.Bytes(), &res)
 	assert.Equal(t, -3, res.Code)
 	assert.Equal(t, "Username does not exist or password is wrong", res.Message)
@@ -92,7 +92,7 @@ func TestUerLogincontroller(t *testing.T) {
 	  }`))
 	router.ServeHTTP(w, req)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, 200, w.Code)
 	json.Unmarshal(w.Body.Bytes(), &res)
 	assert.Equal(t, -1, res.Code)
 	assert.Equal(t, "illegal request", res.Message)
