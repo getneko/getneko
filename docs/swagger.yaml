@@ -7,6 +7,35 @@ definitions:
       message:
         type: string
     type: object
+  structtypes.UserLogin:
+    properties:
+      language:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - language
+    - password
+    - username
+    type: object
+  structtypes.UserRegReq:
+    properties:
+      email:
+        type: string
+      language:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - language
+    - password
+    - username
+    type: object
 host: localhost:8080
 info:
   contact: {}
@@ -33,4 +62,58 @@ paths:
       summary: 获取客户端最低版本
       tags:
       - 客户端信息
+  /v1/userlogin:
+    post:
+      consumes:
+      - application/json
+      description: 用户登陆api
+      parameters:
+      - description: user info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户登陆
+      tags:
+      - 用户操作
+  /v1/userreg:
+    post:
+      consumes:
+      - application/json
+      description: 用户注册api
+      parameters:
+      - description: user info
+        in: body
+        name: UserRegReq
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.UserRegReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户注册
+      tags:
+      - 用户操作
 swagger: "2.0"
