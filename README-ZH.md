@@ -10,6 +10,7 @@
 <div align="center">
 <a href="https://github.com/getneko/getneko/blob/master/README.md" alt="english" >English</a> | 中文版
 </div>
+
 ## :sparkles: 特性
 
 * :cloud: 支持私有化部署，无需向第三方发送数据。
