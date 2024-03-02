@@ -7,7 +7,6 @@ labels: ["question"]
 
 ## Question Report
 
-- 搜索打开和关闭的 [GitHub 问题](https://github.com/eryajf/go-ldap-admin/issues)
 
 请在提交问题之前回答这些问题，谢谢。 | Please answer these questions before submitting them. Thank you.
 
