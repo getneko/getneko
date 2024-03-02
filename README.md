@@ -10,6 +10,7 @@
 <div align="center">
 English | <a href="https://github.com/getneko/getneko/blob/master/README-ZH.md" alt="chinese" >Chinese</a>
 </div>
+
 ## :sparkles: features
 
 * :cloud: Support Privatization deployment，No need to send the data to the third 。
