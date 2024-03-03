@@ -14,3 +14,10 @@ type UserLogin struct {
 	Password string `json:"password" binding:"required"`
 	Language string `json:"language" binding:"required,bcp47_language_tag"`
 }
+
+//创建项目结构体
+type Createproject struct {
+	Name     string `json:"name" binding:"required"`     //名字
+	Username string `json:"username" binding:"required"` //用户名
+	Tokens   string `json:"tokens" binding:"required"`   //用户token
+}

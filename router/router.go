@@ -13,6 +13,7 @@ func Router() *gin.Engine {
 		v1.GET("/chacklowversion", controller.ChackLowVersion)
 		v1.POST("/userreg", controller.Uerregcontroller)
 		v1.POST("/userlogin", controller.UerLogincontroller)
+		v1.POST("/createproject", controller.Projectcreatecontroller)
 	}
 
 	return r
