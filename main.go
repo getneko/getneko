@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	_ "getneko/docs"
 	"getneko/router"
 
@@ -15,7 +16,13 @@ import (
 func main() {
 
 	r := router.Router()
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	//根据flag导入swagger依赖
+	var enabledoc bool
+	flag.BoolVar(&enabledoc, "doc", false, "enable swagger doc")
+	flag.Parse()
+	if enabledoc {
+		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
 	err := r.Run()
 	if err != nil {
 		panic(err)
