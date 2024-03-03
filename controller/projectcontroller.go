@@ -4,6 +4,7 @@ import (
 	"getneko/db"
 	"getneko/structtypes"
 	"getneko/tool"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,13 +32,13 @@ func Projectcreatecontroller(c *gin.Context) {
 	}
 	//检测项目是否存在
 	var projects structtypes.Project
-	err := db.ORMDB.Where("createuser = ? and name = ?", users.Username, procreatereq.Name).First(&projects).Error
+	err := db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Name).First(&projects).Error
 	if err == nil {
 		c.JSON(200, tool.Refal(-6, "project is exist"))
 		return
 	}
 	//创建项目
-	db.ORMDB.Create(&structtypes.Project{Name: procreatereq.Name, Createuser: procreatereq.Username})
+	db.ORMDB.Create(&structtypes.Project{Name: procreatereq.Name, Createuser: strconv.Itoa(int(users.ID))})
 	c.JSON(200, tool.ReSucc("Created successfully"))
 }
 
@@ -64,7 +65,7 @@ func Projectdelcontroller(c *gin.Context) {
 	}
 	//检测项目是否存在
 	var projects structtypes.Project
-	err := db.ORMDB.Where("createuser = ? and name = ?", users.Username, projectdelreq.Name).First(&projects).Error
+	err := db.ORMDB.Where("createuser = ? and name = ?", users.ID, projectdelreq.Name).First(&projects).Error
 	if err != nil {
 		c.JSON(200, tool.Refal(-5, "project does not exist or you are not the creator "))
 		return
