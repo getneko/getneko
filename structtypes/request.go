@@ -21,3 +21,10 @@ type Createproject struct {
 	Username string `json:"username" binding:"required"` //用户名
 	Tokens   string `json:"tokens" binding:"required"`   //用户token
 }
+
+//删除项目结构体
+type Delproject struct {
+	Name     string `json:"name" binding:"required"`     //名字
+	Username string `json:"username" binding:"required"` //用户名
+	Tokens   string `json:"tokens" binding:"required"`   //用户token
+}
