@@ -29,7 +29,47 @@ func Projectcreatecontroller(c *gin.Context) {
 		c.JSON(200, tool.Refal(-4, "user not login"))
 		return
 	}
+	//检测项目是否存在
+	var projects structtypes.Project
+	err := db.ORMDB.Where("createuser = ? and name = ?", users.Username, procreatereq.Name).First(&projects).Error
+	if err == nil {
+		c.JSON(200, tool.Refal(-6, "project is exist"))
+		return
+	}
 	//创建项目
 	db.ORMDB.Create(&structtypes.Project{Name: procreatereq.Name, Createuser: procreatereq.Username})
 	c.JSON(200, tool.ReSucc("Created successfully"))
+}
+
+// @Summary 删除项目
+// @Description 只要创建者才能删除
+// @Tags 项目操作
+// @Accept json
+// @Produce json
+// @Param UserLogin  body structtypes.Delproject true "project info"
+// @Success 200 {object} structtypes.JSONResult{data=string} "desc"
+// @Router /v1/delproject [post]
+func Projectdelcontroller(c *gin.Context) {
+	//参数校验
+	var projectdelreq structtypes.Delproject
+	if err := c.ShouldBindJSON(&projectdelreq); err != nil {
+		c.JSON(200, tool.Refal(-1, "illegal request"))
+		return
+	}
+	//检测用户登录状态
+	users := tool.Chackuserlogin(projectdelreq.Username, projectdelreq.Tokens)
+	if users == nil {
+		c.JSON(200, tool.Refal(-4, "user not login"))
+		return
+	}
+	//检测项目是否存在
+	var projects structtypes.Project
+	err := db.ORMDB.Where("createuser = ? and name = ?", users.Username, projectdelreq.Name).First(&projects).Error
+	if err != nil {
+		c.JSON(200, tool.Refal(-5, "project does not exist or you are not the creator "))
+		return
+	}
+	//执行删除
+	db.ORMDB.Unscoped().Delete(&projects)
+	c.JSON(200, tool.ReSucc("Delete successfully"))
 }

@@ -14,6 +14,7 @@ func Router() *gin.Engine {
 		v1.POST("/userreg", controller.Uerregcontroller)
 		v1.POST("/userlogin", controller.UerLogincontroller)
 		v1.POST("/createproject", controller.Projectcreatecontroller)
+		v1.POST("/delproject", controller.Projectdelcontroller)
 	}
 
 	return r
