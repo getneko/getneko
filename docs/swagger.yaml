@@ -68,6 +68,13 @@ definitions:
     - password
     - username
     type: object
+  structtypes.Usersearchres:
+    properties:
+      id:
+        type: integer
+      username:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact: {}
@@ -200,6 +207,33 @@ paths:
                   type: string
               type: object
       summary: 用户注册
+      tags:
+      - 用户操作
+  /v1/usersearch:
+    get:
+      consumes:
+      - application/json
+      description: 无需鉴权
+      parameters:
+      - in: query
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/structtypes.Usersearchres'
+                  type: array
+              type: object
+      summary: 模糊查询用户
       tags:
       - 用户操作
 swagger: "2.0"

@@ -28,3 +28,8 @@ type Delproject struct {
 	Username string `json:"username" binding:"required"` //用户名
 	Tokens   string `json:"tokens" binding:"required"`   //用户token
 }
+
+//模糊查询结构体
+type Usersearch struct {
+	Name string `form:"name" binding:"required"`
+}
