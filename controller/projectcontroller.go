@@ -42,7 +42,7 @@ func Projectcreatecontroller(c *gin.Context) {
 	//添加管理员权限
 	var crtpro structtypes.Project
 	db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Name).First(&crtpro)
-	db.ORMDB.Create(&structtypes.Permissions{Userid: int(users.ID), Levels: 3, Projectid: crtpro.ID})
+	db.ORMDB.Create(&structtypes.Permissions{Userid: int(users.ID), Levels: 2, Projectid: crtpro.ID})
 	c.JSON(200, tool.ReSucc("Created successfully"))
 }
 
