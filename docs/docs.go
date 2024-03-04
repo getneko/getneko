@@ -233,6 +233,52 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/v1/usersearch": {
+            "get": {
+                "description": "无需鉴权",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户操作"
+                ],
+                "summary": "模糊查询用户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/structtypes.Usersearchres"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -328,6 +374,17 @@ const docTemplate = `{
                 },
                 "password": {
                     "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Usersearchres": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
                 },
                 "username": {
                     "type": "string"
