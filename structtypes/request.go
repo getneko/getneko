@@ -33,3 +33,10 @@ type Delproject struct {
 type Usersearch struct {
 	Name string `form:"name" binding:"required"`
 }
+
+//查询项目权限列表结构体
+type Getpermissionlist struct {
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+}

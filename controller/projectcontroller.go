@@ -39,6 +39,10 @@ func Projectcreatecontroller(c *gin.Context) {
 	}
 	//创建项目
 	db.ORMDB.Create(&structtypes.Project{Name: procreatereq.Name, Createuser: strconv.Itoa(int(users.ID))})
+	//添加管理员权限
+	var crtpro structtypes.Project
+	db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Name).First(&crtpro)
+	db.ORMDB.Create(&structtypes.Permissions{Userid: int(users.ID), Levels: 3, Projectid: crtpro.ID})
 	c.JSON(200, tool.ReSucc("Created successfully"))
 }
 
@@ -72,5 +76,6 @@ func Projectdelcontroller(c *gin.Context) {
 	}
 	//执行删除
 	db.ORMDB.Unscoped().Delete(&projects)
+	db.ORMDB.Where("projectid = ?", projects.ID).Unscoped().Delete(&structtypes.Permissions{})
 	c.JSON(200, tool.ReSucc("Delete successfully"))
 }

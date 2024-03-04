@@ -25,8 +25,6 @@ type Project struct {
 	ID         int    //id
 	Name       string //名字
 	Createuser string //创建者
-	Edituser   string //编辑者
-	Guest      string //只读访问者
 	Feats      string //保留字段
 }
 
@@ -44,4 +42,17 @@ type Apirecode struct {
 	Returncodes  string //返回结构
 	IsDeprecated int    //弃用状态
 	Feats        string //保留字段
+}
+
+//权限
+/*注：
+0 为访客
+1 为编辑者
+2 为管理员
+*/
+type Permissions struct {
+	ID        int //id
+	Userid    int //用户id
+	Projectid int //项目id
+	Levels    int //权限等级
 }

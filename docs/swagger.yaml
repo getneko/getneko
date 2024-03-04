@@ -31,6 +31,31 @@ definitions:
     - tokens
     - username
     type: object
+  structtypes.Getpermissionlist:
+    properties:
+      projectname:
+        description: 项目名
+        type: string
+      tokens:
+        description: 用户token
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - projectname
+    - tokens
+    - username
+    type: object
+  structtypes.Getpermissionlistres:
+    properties:
+      levels:
+        type: integer
+      userID:
+        type: integer
+      username:
+        type: string
+    type: object
   structtypes.JSONResult:
     properties:
       code:
@@ -81,6 +106,35 @@ info:
   title: getneko api doc
   version: "1.0"
 paths:
+  /v1/Getpermissionlist:
+    post:
+      consumes:
+      - application/json
+      description: 需要管理员权限
+      parameters:
+      - description: project info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.Getpermissionlist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/structtypes.Getpermissionlistres'
+                  type: array
+              type: object
+      summary: 获取项目权限表
+      tags:
+      - 权限操作
   /v1/chacklowversion:
     get:
       consumes:
