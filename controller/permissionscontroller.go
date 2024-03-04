@@ -15,7 +15,7 @@ import (
 // @Produce json
 // @Param UserLogin  body structtypes.Getpermissionlist true "project info"
 // @Success 200 {object} structtypes.JSONResult{data=[]structtypes.Getpermissionlistres} "desc"
-// @Router /v1/Getpermissionlist [post]
+// @Router /v1/getpermissionlist [post]
 func Getpermissionlistcontroller(c *gin.Context) {
 	//参数校验
 	var getpermissionlist structtypes.Getpermissionlist
@@ -43,7 +43,7 @@ func Getpermissionlistcontroller(c *gin.Context) {
 	var res []structtypes.Getpermissionlistres
 	prmflags := true //校验是否有权限
 	for i := 0; i < len(prm); i++ {
-		if prm[i].Userid == int(users.ID) && prm[i].Levels == 3 {
+		if prm[i].Userid == int(users.ID) && prm[i].Levels == 2 {
 			prmflags = false
 		}
 		res = append(res, structtypes.Getpermissionlistres{UserID: prm[i].Userid, Username: tool.Getusernamebyid(prm[i].Userid), Levels: prm[i].Levels})

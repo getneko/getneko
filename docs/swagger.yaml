@@ -106,35 +106,6 @@ info:
   title: getneko api doc
   version: "1.0"
 paths:
-  /v1/Getpermissionlist:
-    post:
-      consumes:
-      - application/json
-      description: 需要管理员权限
-      parameters:
-      - description: project info
-        in: body
-        name: UserLogin
-        required: true
-        schema:
-          $ref: '#/definitions/structtypes.Getpermissionlist'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: desc
-          schema:
-            allOf:
-            - $ref: '#/definitions/structtypes.JSONResult'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/structtypes.Getpermissionlistres'
-                  type: array
-              type: object
-      summary: 获取项目权限表
-      tags:
-      - 权限操作
   /v1/chacklowversion:
     get:
       consumes:
@@ -209,6 +180,35 @@ paths:
       summary: 删除项目
       tags:
       - 项目操作
+  /v1/getpermissionlist:
+    post:
+      consumes:
+      - application/json
+      description: 需要管理员权限
+      parameters:
+      - description: project info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.Getpermissionlist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/structtypes.Getpermissionlistres'
+                  type: array
+              type: object
+      summary: 获取项目权限表
+      tags:
+      - 权限操作
   /v1/userlogin:
     post:
       consumes:
