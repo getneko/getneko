@@ -40,3 +40,13 @@ type Getpermissionlist struct {
 	Username    string `json:"username" binding:"required"`    //用户名
 	Tokens      string `json:"tokens" binding:"required"`      //用户token
 }
+
+//设置权限结构体
+type Setpermission struct {
+	Adminnames  string `json:"adminnames"`                     //管理员
+	Editnames   string `json:"editnames"`                      //编辑者
+	Guestnames  string `json:"guestnames"`                     //访客
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+}

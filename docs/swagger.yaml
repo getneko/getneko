@@ -64,6 +64,34 @@ definitions:
       message:
         type: string
     type: object
+  structtypes.Setpermission:
+    properties:
+      adminnames:
+        description: 管理员
+        type: string
+      editnames:
+        description: 编辑者
+        type: string
+      guestnames:
+        description: 访客
+        type: string
+      projectname:
+        description: 项目名
+        type: string
+      tokens:
+        description: 用户token
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - adminnames
+    - editnames
+    - guestnames
+    - projectname
+    - tokens
+    - username
+    type: object
   structtypes.UserLogin:
     properties:
       language:
@@ -207,6 +235,33 @@ paths:
                   type: array
               type: object
       summary: 获取项目权限表
+      tags:
+      - 权限操作
+  /v1/setpermission:
+    post:
+      consumes:
+      - application/json
+      description: 需要管理员权限
+      parameters:
+      - description: project info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.Setpermission'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 设置权限
       tags:
       - 权限操作
   /v1/userlogin:

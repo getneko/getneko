@@ -22,3 +22,14 @@ func Getusernamebyid(id int) string {
 	db.ORMDB.Where("id = ?", id).First(&userdate)
 	return userdate.Username
 }
+
+// 通过用户名查询id
+func Getidbyusername(username string) int {
+	var userdata structtypes.User
+	err := db.ORMDB.Where("username = ?", username).First(&userdata).Error
+	if err != nil {
+		return -1
+	} else {
+		return int(userdata.ID)
+	}
+}
