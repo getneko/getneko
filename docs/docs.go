@@ -191,6 +191,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/setpermission": {
+            "post": {
+                "description": "需要管理员权限",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "权限操作"
+                ],
+                "summary": "设置权限",
+                "parameters": [
+                    {
+                        "description": "project info",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structtypes.Setpermission"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v1/userlogin": {
             "post": {
                 "description": "用户登陆api",
@@ -419,6 +465,43 @@ const docTemplate = `{
                 },
                 "data": {},
                 "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Setpermission": {
+            "type": "object",
+            "required": [
+                "adminnames",
+                "editnames",
+                "guestnames",
+                "projectname",
+                "tokens",
+                "username"
+            ],
+            "properties": {
+                "adminnames": {
+                    "description": "管理员",
+                    "type": "string"
+                },
+                "editnames": {
+                    "description": "编辑者",
+                    "type": "string"
+                },
+                "guestnames": {
+                    "description": "访客",
+                    "type": "string"
+                },
+                "projectname": {
+                    "description": "项目名",
+                    "type": "string"
+                },
+                "tokens": {
+                    "description": "用户token",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
                     "type": "string"
                 }
             }
