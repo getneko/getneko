@@ -4,6 +4,7 @@ import (
 	"getneko/db"
 	"getneko/structtypes"
 	"getneko/tool"
+	"strconv"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -95,13 +96,12 @@ func Setpermissioncontroller(c *gin.Context) {
 		c.JSON(200, tool.Refal(-8, "User does not have permission"))
 		return
 	}
-	//清空权限
-	db.ORMDB.Where("projectid = ?", projects.ID).Unscoped().Delete(&structtypes.Permissions{})
 	//写入权限
 	//管理员
 	adminarr := strings.Split(setpermission.Adminnames, ",")
+	adminflags := true
+	var adminid []int
 	if adminarr[0] != "" {
-		var adminid []int
 		for i := 0; i < len(adminarr); i++ {
 			adminidnow := tool.Getidbyusername(adminarr[i])
 			if adminidnow == -1 {
@@ -110,15 +110,22 @@ func Setpermissioncontroller(c *gin.Context) {
 			} else {
 				adminid = append(adminid, adminidnow)
 			}
+			if strconv.Itoa(adminidnow) == projects.Createuser {
+				adminflags = false
+			}
 		}
-		for i := 0; i < len(adminarr); i++ {
-			db.ORMDB.Create(&structtypes.Permissions{Userid: adminid[i], Projectid: projects.ID, Levels: 2})
+		if adminflags {
+			c.JSON(200, tool.Refal(-11, "Creator must be an administrator"))
+			return
 		}
+	} else {
+		c.JSON(200, tool.Refal(-10, "The project must have an administrator"))
+		return
 	}
 	//编辑者
 	editarr := strings.Split(setpermission.Editnames, ",")
+	var editid []int
 	if editarr[0] != "" {
-		var editid []int
 		for i := 0; i < len(editarr); i++ {
 			editidnow := tool.Getidbyusername(editarr[i])
 			if editidnow == -1 {
@@ -128,14 +135,12 @@ func Setpermissioncontroller(c *gin.Context) {
 				editid = append(editid, editidnow)
 			}
 		}
-		for i := 0; i < len(editarr); i++ {
-			db.ORMDB.Create(&structtypes.Permissions{Userid: editid[i], Projectid: projects.ID, Levels: 1})
-		}
+
 	}
 	//访客
 	guestarr := strings.Split(setpermission.Guestnames, ",")
+	var guestid []int
 	if guestarr[0] != "" {
-		var guestid []int
 		for i := 0; i < len(guestarr); i++ {
 			guestidnow := tool.Getidbyusername(guestarr[i])
 			if guestidnow == -1 {
@@ -145,6 +150,21 @@ func Setpermissioncontroller(c *gin.Context) {
 				guestid = append(guestid, guestidnow)
 			}
 		}
+	}
+	//清空权限
+	db.ORMDB.Where("projectid = ?", projects.ID).Unscoped().Delete(&structtypes.Permissions{})
+	//写入数据库
+	if adminarr[0] != "" {
+		for i := 0; i < len(adminarr); i++ {
+			db.ORMDB.Create(&structtypes.Permissions{Userid: adminid[i], Projectid: projects.ID, Levels: 2})
+		}
+	}
+	if editarr[0] != "" {
+		for i := 0; i < len(editarr); i++ {
+			db.ORMDB.Create(&structtypes.Permissions{Userid: editid[i], Projectid: projects.ID, Levels: 1})
+		}
+	}
+	if guestarr[0] != "" {
 		for i := 0; i < len(guestarr); i++ {
 			db.ORMDB.Create(&structtypes.Permissions{Userid: guestid[i], Projectid: projects.ID, Levels: 0})
 		}
