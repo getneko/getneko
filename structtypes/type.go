@@ -40,7 +40,8 @@ type Apirecode struct {
 	Bodyrecodes  string //body结构
 	Returntype   string //返回类型
 	Returncodes  string //返回结构
-	IsDeprecated int    //弃用状态
+	IsDeprecated int    //弃用状态 1表示正常 2表示弃用
+	Projectid    int    //项目id
 	Feats        string //保留字段
 }
 

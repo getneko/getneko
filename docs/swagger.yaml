@@ -1,4 +1,66 @@
 definitions:
+  structtypes.Addapireq:
+    properties:
+      bodyrecodes:
+        description: body结构
+        type: string
+      bodytype:
+        description: body的类型
+        type: string
+      headcode:
+        description: 请求头部结构
+        type: string
+      isDeprecated:
+        description: 弃用状态
+        enum:
+        - 1
+        - 2
+        type: integer
+      path:
+        description: 路径
+        type: string
+      pathcode:
+        description: path结构
+        type: string
+      projectname:
+        description: 项目名
+        type: string
+      returncodes:
+        description: 返回结构
+        type: string
+      returntype:
+        description: 返回类型
+        type: string
+      tokens:
+        description: 用户token
+        type: string
+      types:
+        description: 请求类型
+        enum:
+        - get
+        - post
+        type: string
+      username:
+        description: 用户名
+        type: string
+      words:
+        description: 注释
+        type: string
+    required:
+    - bodyrecodes
+    - bodytype
+    - headcode
+    - isDeprecated
+    - path
+    - pathcode
+    - projectname
+    - returncodes
+    - returntype
+    - tokens
+    - types
+    - username
+    - words
+    type: object
   structtypes.Createproject:
     properties:
       name:
@@ -85,9 +147,6 @@ definitions:
         description: 用户名
         type: string
     required:
-    - adminnames
-    - editnames
-    - guestnames
     - projectname
     - tokens
     - username
@@ -134,6 +193,33 @@ info:
   title: getneko api doc
   version: "1.0"
 paths:
+  /v1/addapi:
+    post:
+      consumes:
+      - application/json
+      description: 参数校验慢慢完善
+      parameters:
+      - description: api info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.Addapireq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 创建api
+      tags:
+      - api记录操作
   /v1/chacklowversion:
     get:
       consumes:

@@ -18,6 +18,7 @@ func Router() *gin.Engine {
 		v1.GET("/usersearch", controller.Uernamesearchcontroller)
 		v1.POST("/getpermissionlist", controller.Getpermissionlistcontroller)
 		v1.POST("/setpermission", controller.Setpermissioncontroller)
+		v1.POST("/addapi", controller.Addapicontroller)
 	}
 
 	return r
