@@ -237,6 +237,55 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/getprojectlist": {
+            "post": {
+                "description": "项目选择页面用的",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "项目操作"
+                ],
+                "summary": "查询项目列表",
+                "parameters": [
+                    {
+                        "description": "api info",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structtypes.GetProjectlist"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/structtypes.Getprojectlistres"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v1/setpermission": {
             "post": {
                 "description": "需要管理员权限",
@@ -547,6 +596,23 @@ const docTemplate = `{
                 }
             }
         },
+        "structtypes.GetProjectlist": {
+            "type": "object",
+            "required": [
+                "tokens",
+                "username"
+            ],
+            "properties": {
+                "tokens": {
+                    "description": "用户token",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
         "structtypes.Getpermissionlist": {
             "type": "object",
             "required": [
@@ -579,6 +645,23 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Getprojectlistres": {
+            "type": "object",
+            "properties": {
+                "apinum": {
+                    "type": "integer"
+                },
+                "creater": {
+                    "type": "string"
+                },
+                "projectid": {
+                    "type": "integer"
+                },
+                "projectname": {
                     "type": "string"
                 }
             }
