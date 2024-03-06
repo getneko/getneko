@@ -33,3 +33,18 @@ func Getidbyusername(username string) int {
 		return int(userdata.ID)
 	}
 }
+
+// 检查是否拥有权限
+func Chackuserhavepermission(id int, projectid int, need int) bool {
+	var chackpri structtypes.Permissions
+	err := db.ORMDB.Where("userid = ? and projectid = ?", id, projectid).First(&chackpri).Error
+	if err != nil {
+		return false
+	} else {
+		if need <= chackpri.Levels {
+			return true
+		} else {
+			return false
+		}
+	}
+}
