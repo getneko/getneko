@@ -93,6 +93,18 @@ definitions:
     - tokens
     - username
     type: object
+  structtypes.GetProjectlist:
+    properties:
+      tokens:
+        description: 用户token
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - tokens
+    - username
+    type: object
   structtypes.Getpermissionlist:
     properties:
       projectname:
@@ -116,6 +128,17 @@ definitions:
       userID:
         type: integer
       username:
+        type: string
+    type: object
+  structtypes.Getprojectlistres:
+    properties:
+      apinum:
+        type: integer
+      creater:
+        type: string
+      projectid:
+        type: integer
+      projectname:
         type: string
     type: object
   structtypes.JSONResult:
@@ -323,6 +346,35 @@ paths:
       summary: 获取项目权限表
       tags:
       - 权限操作
+  /v1/getprojectlist:
+    post:
+      consumes:
+      - application/json
+      description: 项目选择页面用的
+      parameters:
+      - description: api info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.GetProjectlist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/structtypes.Getprojectlistres'
+                  type: array
+              type: object
+      summary: 查询项目列表
+      tags:
+      - 项目操作
   /v1/setpermission:
     post:
       consumes:

@@ -50,3 +50,9 @@ type Setpermission struct {
 	Username    string `json:"username" binding:"required"`    //用户名
 	Tokens      string `json:"tokens" binding:"required"`      //用户token
 }
+
+//获取项目列表结构体
+type GetProjectlist struct {
+	Username string `json:"username" binding:"required"` //用户名
+	Tokens   string `json:"tokens" binding:"required"`   //用户token
+}

@@ -79,3 +79,43 @@ func Projectdelcontroller(c *gin.Context) {
 	db.ORMDB.Where("projectid = ?", projects.ID).Unscoped().Delete(&structtypes.Permissions{})
 	c.JSON(200, tool.ReSucc("Delete successfully"))
 }
+
+// @Summary 查询项目列表
+// @Description 项目选择页面用的
+// @Tags 项目操作
+// @Accept json
+// @Produce json
+// @Param UserLogin  body structtypes.GetProjectlist true "api info"
+// @Success 200 {object} structtypes.JSONResult{data=[]structtypes.Getprojectlistres} "desc"
+// @Router /v1/getprojectlist [post]
+func GetProjectlistcontroller(c *gin.Context) {
+	//参数校验
+	var getProjectlist structtypes.GetProjectlist
+	if err := c.ShouldBindJSON(&getProjectlist); err != nil {
+		c.JSON(200, tool.Refal(-1, "illegal request"))
+		return
+	}
+	//检测用户登录状态
+	users := tool.Chackuserlogin(getProjectlist.Username, getProjectlist.Tokens)
+	if users == nil {
+		c.JSON(200, tool.Refal(-4, "user not login"))
+		return
+	}
+	//获取用户有权限的项目id
+	var userper []structtypes.Permissions
+	var res []structtypes.Getprojectlistres
+	db.ORMDB.Where("userid = ?", users.ID).Find(&userper)
+	if len(userper) == 0 {
+		c.JSON(200, tool.Refal(-12, "There are no projects in the account yet"))
+		return
+	}
+	for i := 0; i < len(userper); i++ {
+		var projects structtypes.Project
+		var contum int64
+		db.ORMDB.Where("id = ?", userper[i].Projectid).Find(&projects)
+		db.ORMDB.Model(&structtypes.Apirecode{}).Where("projectid = ?", projects.ID).Count(&contum)
+		createrid, _ := strconv.Atoi(projects.Createuser)
+		res = append(res, structtypes.Getprojectlistres{Projectid: projects.ID, Projectname: projects.Name, Creater: tool.Getusernamebyid(createrid), Apinum: int(contum)})
+	}
+	c.JSON(200, tool.ReSucc(res))
+}

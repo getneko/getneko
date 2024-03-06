@@ -12,3 +12,11 @@ type Getpermissionlistres struct {
 	Username string
 	Levels   int
 }
+
+//获取项目列表返回
+type Getprojectlistres struct {
+	Projectid   int
+	Projectname string
+	Creater     string
+	Apinum      int
+}
