@@ -142,6 +142,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/delapi": {
+            "post": {
+                "description": "没有说明",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api记录操作"
+                ],
+                "summary": "删除api",
+                "parameters": [
+                    {
+                        "description": "api info",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structtypes.Delapi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v1/delproject": {
             "post": {
                 "description": "只要创建者才能删除",
@@ -657,6 +703,32 @@ const docTemplate = `{
             "properties": {
                 "name": {
                     "description": "名字",
+                    "type": "string"
+                },
+                "tokens": {
+                    "description": "用户token",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Delapi": {
+            "type": "object",
+            "required": [
+                "apiid",
+                "projectname",
+                "tokens",
+                "username"
+            ],
+            "properties": {
+                "apiid": {
+                    "type": "integer"
+                },
+                "projectname": {
+                    "description": "项目名",
                     "type": "string"
                 },
                 "tokens": {

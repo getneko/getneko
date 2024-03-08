@@ -22,6 +22,7 @@ func Router() *gin.Engine {
 		v1.POST("/getprojectlist", controller.GetProjectlistcontroller)
 		v1.POST("/getapilist", controller.Getapicontroller)
 		v1.POST("/getapibyid", controller.Getapibyidcontroller)
+		v1.POST("/delapi", controller.Delapicontroller)
 	}
 
 	return r
