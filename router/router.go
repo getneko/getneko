@@ -20,6 +20,7 @@ func Router() *gin.Engine {
 		v1.POST("/setpermission", controller.Setpermissioncontroller)
 		v1.POST("/addapi", controller.Addapicontroller)
 		v1.POST("/getprojectlist", controller.GetProjectlistcontroller)
+		v1.POST("/getapilist", controller.Getapicontroller)
 	}
 
 	return r

@@ -105,6 +105,37 @@ definitions:
     - tokens
     - username
     type: object
+  structtypes.Getapilist:
+    properties:
+      projectname:
+        description: 项目名
+        type: string
+      tokens:
+        description: 用户token
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - projectname
+    - tokens
+    - username
+    type: object
+  structtypes.Getapilistres:
+    properties:
+      id:
+        description: id
+        type: integer
+      isDeprecated:
+        description: 弃用状态 1表示正常 2表示弃用
+        type: integer
+      path:
+        description: 路径
+        type: string
+      types:
+        description: 请求类型
+        type: string
+    type: object
   structtypes.Getpermissionlist:
     properties:
       projectname:
@@ -317,6 +348,35 @@ paths:
       summary: 删除项目
       tags:
       - 项目操作
+  /v1/getapilist:
+    post:
+      consumes:
+      - application/json
+      description: 目前没有需要注意的
+      parameters:
+      - description: api info
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/structtypes.Getapilist'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/structtypes.JSONResult'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/structtypes.Getapilistres'
+                  type: array
+              type: object
+      summary: 获取api列表
+      tags:
+      - api记录操作
   /v1/getpermissionlist:
     post:
       consumes:

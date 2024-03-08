@@ -188,6 +188,55 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/getapilist": {
+            "post": {
+                "description": "目前没有需要注意的",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api记录操作"
+                ],
+                "summary": "获取api列表",
+                "parameters": [
+                    {
+                        "description": "api info",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structtypes.Getapilist"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/structtypes.Getapilistres"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v1/getpermissionlist": {
             "post": {
                 "description": "需要管理员权限",
@@ -609,6 +658,49 @@ const docTemplate = `{
                 },
                 "username": {
                     "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Getapilist": {
+            "type": "object",
+            "required": [
+                "projectname",
+                "tokens",
+                "username"
+            ],
+            "properties": {
+                "projectname": {
+                    "description": "项目名",
+                    "type": "string"
+                },
+                "tokens": {
+                    "description": "用户token",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Getapilistres": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "isDeprecated": {
+                    "description": "弃用状态 1表示正常 2表示弃用",
+                    "type": "integer"
+                },
+                "path": {
+                    "description": "路径",
+                    "type": "string"
+                },
+                "types": {
+                    "description": "请求类型",
                     "type": "string"
                 }
             }
