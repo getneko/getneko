@@ -91,7 +91,7 @@ func Getapicontroller(c *gin.Context) {
 		return
 	}
 	//检查是否拥有权限
-	if !tool.Chackuserhavepermission(int(users.ID), projects.ID, 1) {
+	if !tool.Chackuserhavepermission(int(users.ID), projects.ID, 0) {
 		c.JSON(200, tool.Refal(-8, "User does not have permission"))
 		return
 	}
@@ -130,7 +130,7 @@ func Getapibyidcontroller(c *gin.Context) {
 		return
 	}
 	//检查是否拥有权限
-	if !tool.Chackuserhavepermission(int(users.ID), projects.ID, 1) {
+	if !tool.Chackuserhavepermission(int(users.ID), projects.ID, 0) {
 		c.JSON(200, tool.Refal(-8, "User does not have permission"))
 		return
 	}
