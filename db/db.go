@@ -36,6 +36,18 @@ func init() {
 	err := ORMDB.AutoMigrate(&structtypes.User{})
 	if err != nil {
 		log.Error("Database connection initialization failed", err.Error())
+	}
+	err = ORMDB.AutoMigrate(&structtypes.Permissions{})
+	if err != nil {
+		log.Error("Database connection initialization failed", err.Error())
+	}
+	err = ORMDB.AutoMigrate(&structtypes.Apirecode{})
+	if err != nil {
+		log.Error("Database connection initialization failed", err.Error())
+	}
+	err = ORMDB.AutoMigrate(&structtypes.Project{})
+	if err != nil {
+		log.Error("Database connection initialization failed", err.Error())
 	} else {
 		log.Info("Database connection initialization successful")
 	}

@@ -76,3 +76,22 @@ func UerLogincontroller(c *gin.Context) {
 	// 返回
 	c.JSON(200, tool.ReSucc(newtoken))
 }
+
+// @Summary 模糊查询用户
+// @Description 无需鉴权
+// @Tags 用户操作
+// @Accept json
+// @Produce json
+// @Param Usersearch  query structtypes.Usersearch true "user info"
+// @Success 200 {object} structtypes.JSONResult{data=[]structtypes.Usersearchres} "desc"
+// @Router /v1/usersearch [GET]
+func Uernamesearchcontroller(c *gin.Context) {
+	var usersearch structtypes.Usersearch
+	if err := c.ShouldBindQuery(&usersearch); err != nil {
+		c.JSON(200, tool.Refal(-1, "illegal request"))
+		return
+	}
+	var res []structtypes.Usersearchres
+	db.ORMDB.Model(&structtypes.User{}).Where("username LIKE ? ", "%"+usersearch.Name+"%").Find(&res)
+	c.JSON(200, tool.ReSucc(res))
+}

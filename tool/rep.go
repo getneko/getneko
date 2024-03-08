@@ -1,6 +1,8 @@
 package tool
 
-import "getneko/structtypes"
+import (
+	"getneko/structtypes"
+)
 
 // 返回错误结果
 func Refal(code int, msg string) *structtypes.JSONResult {
