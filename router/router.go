@@ -13,6 +13,16 @@ func Router() *gin.Engine {
 		v1.GET("/chacklowversion", controller.ChackLowVersion)
 		v1.POST("/userreg", controller.Uerregcontroller)
 		v1.POST("/userlogin", controller.UerLogincontroller)
+		v1.POST("/createproject", controller.Projectcreatecontroller)
+		v1.POST("/delproject", controller.Projectdelcontroller)
+		v1.GET("/usersearch", controller.Uernamesearchcontroller)
+		v1.POST("/getpermissionlist", controller.Getpermissionlistcontroller)
+		v1.POST("/setpermission", controller.Setpermissioncontroller)
+		v1.POST("/addapi", controller.Addapicontroller)
+		v1.POST("/getprojectlist", controller.GetProjectlistcontroller)
+		v1.POST("/getapilist", controller.Getapicontroller)
+		v1.POST("/getapibyid", controller.Getapibyidcontroller)
+		v1.POST("/delapi", controller.Delapicontroller)
 	}
 
 	return r

@@ -19,3 +19,41 @@ type User struct {
 	Email    string //邮箱
 	Token    string //令牌
 }
+
+// 项目
+type Project struct {
+	ID         int    //id
+	Name       string //名字
+	Createuser string //创建者
+	Feats      string //保留字段
+}
+
+// api 记录
+type Apirecode struct {
+	ID           int    //id
+	Types        string //请求类型
+	Path         string //路径
+	Words        string //注释
+	Headcode     string //请求头部结构
+	Pathcode     string //path结构
+	Bodytype     string //body的类型
+	Bodyrecodes  string //body结构
+	Returntype   string //返回类型
+	Returncodes  string //返回结构
+	IsDeprecated int    //弃用状态 1表示正常 2表示弃用
+	Projectid    int    //项目id
+	Feats        string //保留字段
+}
+
+//权限
+/*注：
+0 为访客
+1 为编辑者
+2 为管理员
+*/
+type Permissions struct {
+	ID        int //id
+	Userid    int //用户id
+	Projectid int //项目id
+	Levels    int //权限等级
+}

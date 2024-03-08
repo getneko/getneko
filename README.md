@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://www.getneko.top/zh/" alt="logo" ><img src="https://raw.githubusercontent.com/getneko/getneko/main/logo.jpg" width="150"/></a>
+  <a href="https://www.getneko.top/" alt="logo" ><img src="https://raw.githubusercontent.com/getneko/getneko/main/logo.jpg" width="150"/></a>
   <br>
   getneko(In development)
   <br>

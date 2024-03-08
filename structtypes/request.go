@@ -14,3 +14,68 @@ type UserLogin struct {
 	Password string `json:"password" binding:"required"`
 	Language string `json:"language" binding:"required,bcp47_language_tag"`
 }
+
+// 创建项目结构体
+type Createproject struct {
+	Name     string `json:"name" binding:"required"`     //名字
+	Username string `json:"username" binding:"required"` //用户名
+	Tokens   string `json:"tokens" binding:"required"`   //用户token
+}
+
+// 删除项目结构体
+type Delproject struct {
+	Name     string `json:"name" binding:"required"`     //名字
+	Username string `json:"username" binding:"required"` //用户名
+	Tokens   string `json:"tokens" binding:"required"`   //用户token
+}
+
+// 模糊查询结构体
+type Usersearch struct {
+	Name string `form:"name" binding:"required"`
+}
+
+// 查询项目权限列表结构体
+type Getpermissionlist struct {
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+}
+
+// 设置权限结构体
+type Setpermission struct {
+	Adminnames  string `json:"adminnames"`                     //管理员
+	Editnames   string `json:"editnames"`                      //编辑者
+	Guestnames  string `json:"guestnames"`                     //访客
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+}
+
+// 获取项目列表结构体
+type GetProjectlist struct {
+	Username string `json:"username" binding:"required"` //用户名
+	Tokens   string `json:"tokens" binding:"required"`   //用户token
+}
+
+// 获取api列表
+type Getapilist struct {
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+	Projectname string `json:"projectname" binding:"required"` //项目名
+}
+
+// 通过id获取api详情
+type Getapi struct {
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Apiid       int    `json:"apiid" binding:"required"`
+}
+
+// 删除api请求
+type Delapi struct {
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Apiid       int    `json:"apiid" binding:"required"`
+}
