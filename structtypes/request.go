@@ -63,3 +63,11 @@ type Getapilist struct {
 	Tokens      string `json:"tokens" binding:"required"`      //用户token
 	Projectname string `json:"projectname" binding:"required"` //项目名
 }
+
+//通过id获取api详情
+type Getapi struct {
+	Username    string `json:"username" binding:"required"`    //用户名
+	Tokens      string `json:"tokens" binding:"required"`      //用户token
+	Projectname string `json:"projectname" binding:"required"` //项目名
+	Apiid       int    `json:"apiid" binding:"required"`
+}

@@ -188,6 +188,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/getapibyid": {
+            "post": {
+                "description": "目前没有需要注意的",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api记录操作"
+                ],
+                "summary": "通过id获取api",
+                "parameters": [
+                    {
+                        "description": "api info",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structtypes.Getapi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "desc",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/structtypes.JSONResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/structtypes.Getapires"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v1/getapilist": {
             "post": {
                 "description": "目前没有需要注意的",
@@ -662,6 +708,32 @@ const docTemplate = `{
                 }
             }
         },
+        "structtypes.Getapi": {
+            "type": "object",
+            "required": [
+                "apiid",
+                "projectname",
+                "tokens",
+                "username"
+            ],
+            "properties": {
+                "apiid": {
+                    "type": "integer"
+                },
+                "projectname": {
+                    "description": "项目名",
+                    "type": "string"
+                },
+                "tokens": {
+                    "description": "用户token",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
         "structtypes.Getapilist": {
             "type": "object",
             "required": [
@@ -701,6 +773,51 @@ const docTemplate = `{
                 },
                 "types": {
                     "description": "请求类型",
+                    "type": "string"
+                }
+            }
+        },
+        "structtypes.Getapires": {
+            "type": "object",
+            "properties": {
+                "bodyrecodes": {
+                    "description": "body结构",
+                    "type": "string"
+                },
+                "bodytype": {
+                    "description": "body的类型",
+                    "type": "string"
+                },
+                "headcode": {
+                    "description": "请求头部结构",
+                    "type": "string"
+                },
+                "isDeprecated": {
+                    "description": "弃用状态 1表示正常 2表示弃用",
+                    "type": "integer"
+                },
+                "path": {
+                    "description": "路径",
+                    "type": "string"
+                },
+                "pathcode": {
+                    "description": "path结构",
+                    "type": "string"
+                },
+                "returncodes": {
+                    "description": "返回结构",
+                    "type": "string"
+                },
+                "returntype": {
+                    "description": "返回类型",
+                    "type": "string"
+                },
+                "types": {
+                    "description": "请求类型",
+                    "type": "string"
+                },
+                "words": {
+                    "description": "注释",
                     "type": "string"
                 }
             }
