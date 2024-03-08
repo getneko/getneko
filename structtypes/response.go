@@ -20,3 +20,11 @@ type Getprojectlistres struct {
 	Creater     string
 	Apinum      int
 }
+
+//获取api列表返回
+type Getapilistres struct {
+	ID           int    //id
+	Types        string //请求类型
+	Path         string //路径
+	IsDeprecated int    //弃用状态 1表示正常 2表示弃用
+}
