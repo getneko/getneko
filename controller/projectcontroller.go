@@ -32,16 +32,16 @@ func Projectcreatecontroller(c *gin.Context) {
 	}
 	//检测项目是否存在
 	var projects structtypes.Project
-	err := db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Name).First(&projects).Error
+	err := db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Projectname).First(&projects).Error
 	if err == nil {
 		c.JSON(200, tool.Refal(-6, "project is exist"))
 		return
 	}
 	//创建项目
-	db.ORMDB.Create(&structtypes.Project{Name: procreatereq.Name, Createuser: strconv.Itoa(int(users.ID))})
+	db.ORMDB.Create(&structtypes.Project{Name: procreatereq.Projectname, Createuser: strconv.Itoa(int(users.ID))})
 	//添加管理员权限
 	var crtpro structtypes.Project
-	db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Name).First(&crtpro)
+	db.ORMDB.Where("createuser = ? and name = ?", users.ID, procreatereq.Projectname).First(&crtpro)
 	db.ORMDB.Create(&structtypes.Permissions{Userid: int(users.ID), Levels: 2, Projectid: crtpro.ID})
 	c.JSON(200, tool.ReSucc("Created successfully"))
 }
@@ -69,7 +69,7 @@ func Projectdelcontroller(c *gin.Context) {
 	}
 	//检测项目是否存在
 	var projects structtypes.Project
-	err := db.ORMDB.Where("createuser = ? and name = ?", users.ID, projectdelreq.Name).First(&projects).Error
+	err := db.ORMDB.Where("createuser = ? and name = ?", users.ID, projectdelreq.Projectname).First(&projects).Error
 	if err != nil {
 		c.JSON(200, tool.Refal(-5, "project does not exist or you are not the creator "))
 		return

@@ -92,6 +92,6 @@ func Uernamesearchcontroller(c *gin.Context) {
 		return
 	}
 	var res []structtypes.Usersearchres
-	db.ORMDB.Model(&structtypes.User{}).Where("username LIKE ? ", "%"+usersearch.Name+"%").Find(&res)
+	db.ORMDB.Model(&structtypes.User{}).Where("username LIKE ? ", "%"+usersearch.Username+"%").Find(&res)
 	c.JSON(200, tool.ReSucc(res))
 }

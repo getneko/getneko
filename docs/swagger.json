@@ -573,9 +573,8 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "name": "name",
-                        "in": "query",
-                        "required": true
+                        "name": "username",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -688,12 +687,12 @@
         "structtypes.Createproject": {
             "type": "object",
             "required": [
-                "name",
+                "projectname",
                 "tokens",
                 "username"
             ],
             "properties": {
-                "name": {
+                "projectname": {
                     "description": "名字",
                     "type": "string"
                 },
@@ -736,12 +735,12 @@
         "structtypes.Delproject": {
             "type": "object",
             "required": [
-                "name",
+                "projectname",
                 "tokens",
                 "username"
             ],
             "properties": {
-                "name": {
+                "projectname": {
                     "description": "名字",
                     "type": "string"
                 },
@@ -994,7 +993,12 @@
             ],
             "properties": {
                 "language": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "zh-Hans",
+                        "zh-Hant",
+                        "en-US"
+                    ]
                 },
                 "password": {
                     "type": "string"
@@ -1017,7 +1021,12 @@
                     "type": "string"
                 },
                 "language": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "zh-Hans",
+                        "zh-Hant",
+                        "en-US"
+                    ]
                 },
                 "password": {
                     "type": "string"

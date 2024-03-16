@@ -581,9 +581,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "name": "name",
-                        "in": "query",
-                        "required": true
+                        "name": "username",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -696,12 +695,12 @@ const docTemplate = `{
         "structtypes.Createproject": {
             "type": "object",
             "required": [
-                "name",
+                "projectname",
                 "tokens",
                 "username"
             ],
             "properties": {
-                "name": {
+                "projectname": {
                     "description": "名字",
                     "type": "string"
                 },
@@ -744,12 +743,12 @@ const docTemplate = `{
         "structtypes.Delproject": {
             "type": "object",
             "required": [
-                "name",
+                "projectname",
                 "tokens",
                 "username"
             ],
             "properties": {
-                "name": {
+                "projectname": {
                     "description": "名字",
                     "type": "string"
                 },
@@ -1002,7 +1001,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "language": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "zh-Hans",
+                        "zh-Hant",
+                        "en-US"
+                    ]
                 },
                 "password": {
                     "type": "string"
@@ -1025,7 +1029,12 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "language": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "zh-Hans",
+                        "zh-Hant",
+                        "en-US"
+                    ]
                 },
                 "password": {
                     "type": "string"

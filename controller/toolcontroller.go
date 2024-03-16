@@ -14,5 +14,5 @@ import (
 // @Success 200 {object} structtypes.JSONResult{data=string} "desc"
 // @Router /v1/chacklowversion [get]
 func ChackLowVersion(c *gin.Context) {
-	c.JSON(200, &structtypes.JSONResult{Code: 0, Message: "", Data: "1.0"})
+	c.JSON(200, &structtypes.JSONResult{Code: 0, Message: "", Data: "1.0.0"})
 }

@@ -63,7 +63,7 @@ definitions:
     type: object
   structtypes.Createproject:
     properties:
-      name:
+      projectname:
         description: 名字
         type: string
       tokens:
@@ -73,7 +73,7 @@ definitions:
         description: 用户名
         type: string
     required:
-    - name
+    - projectname
     - tokens
     - username
     type: object
@@ -98,7 +98,7 @@ definitions:
     type: object
   structtypes.Delproject:
     properties:
-      name:
+      projectname:
         description: 名字
         type: string
       tokens:
@@ -108,7 +108,7 @@ definitions:
         description: 用户名
         type: string
     required:
-    - name
+    - projectname
     - tokens
     - username
     type: object
@@ -279,6 +279,10 @@ definitions:
   structtypes.UserLogin:
     properties:
       language:
+        enum:
+        - zh-Hans
+        - zh-Hant
+        - en-US
         type: string
       password:
         type: string
@@ -294,6 +298,10 @@ definitions:
       email:
         type: string
       language:
+        enum:
+        - zh-Hans
+        - zh-Hant
+        - en-US
         type: string
       password:
         type: string
@@ -648,8 +656,7 @@ paths:
       description: 无需鉴权
       parameters:
       - in: query
-        name: name
-        required: true
+        name: username
         type: string
       produces:
       - application/json
