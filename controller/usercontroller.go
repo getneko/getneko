@@ -32,8 +32,16 @@ func Uerregcontroller(c *gin.Context) {
 	}
 	//生成盐
 	salts, err := tool.GetRandString(10)
+	if err != nil {
+		c.JSON(200, tool.Refal(-500, "unknown mistake"))
+		return
+	}
 	//生成令牌
 	tokens, err := tool.GetRandString(30)
+	if err != nil {
+		c.JSON(200, tool.Refal(-500, "unknown mistake"))
+		return
+	}
 	//加密密码
 	pass := tool.GetSha256(salts + userregreq.Password)
 	//写入数据库
@@ -70,6 +78,10 @@ func UerLogincontroller(c *gin.Context) {
 	}
 	// 更新表
 	newtoken, err := tool.GetRandString(30)
+	if err != nil {
+		c.JSON(200, tool.Refal(-500, "unknown mistake"))
+		return
+	}
 	users.Token = newtoken
 	users.Language = userlogin.Language
 	db.ORMDB.Save(&users)
