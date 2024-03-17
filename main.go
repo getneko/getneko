@@ -6,6 +6,7 @@ import (
 	"getneko/router"
 	"strconv"
 
+	log "github.com/sirupsen/logrus"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -24,6 +25,7 @@ func main() {
 	var flagports int
 	flag.IntVar(&flagports, "port", 61223, "set server port")
 	flag.Parse()
+	log.Info("The server is running on port " + strconv.Itoa(flagports))
 	runports := ":" + strconv.Itoa(flagports)
 	if enabledoc {
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

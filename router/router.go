@@ -7,6 +7,7 @@ import (
 )
 
 func Router() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	v1 := r.Group("/v1")
 	{
