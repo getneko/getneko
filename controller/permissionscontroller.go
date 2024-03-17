@@ -151,6 +151,11 @@ func Setpermissioncontroller(c *gin.Context) {
 			}
 		}
 	}
+	//判断是否重复
+	if tool.HasDuplicate(adminarr, editarr, guestarr) {
+		c.JSON(200, tool.Refal(-14, "Duplicate users exist"))
+		return
+	}
 	//清空权限
 	db.ORMDB.Where("projectid = ?", projects.ID).Unscoped().Delete(&structtypes.Permissions{})
 	//写入数据库

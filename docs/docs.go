@@ -1003,9 +1003,9 @@ const docTemplate = `{
                 "language": {
                     "type": "string",
                     "enum": [
-                        "zh-Hans",
-                        "zh-Hant",
-                        "en-US"
+                        "zh_Hans",
+                        "zh_Hant",
+                        "en_US"
                     ]
                 },
                 "password": {
@@ -1031,9 +1031,9 @@ const docTemplate = `{
                 "language": {
                     "type": "string",
                     "enum": [
-                        "zh-Hans",
-                        "zh-Hant",
-                        "en-US"
+                        "zh_Hans",
+                        "zh_Hant",
+                        "en_US"
                     ]
                 },
                 "password": {

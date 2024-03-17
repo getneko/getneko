@@ -4,7 +4,7 @@ package structtypes
 type UserRegReq struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
-	Language string `json:"language" binding:"required,oneof=zh-Hans zh-Hant en-US"`
+	Language string `json:"language" binding:"required,oneof=zh_Hans zh_Hant en_US"`
 	Email    string `json:"email" binding:"required,email"`
 }
 
@@ -12,7 +12,7 @@ type UserRegReq struct {
 type UserLogin struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
-	Language string `json:"language" binding:"required,oneof=zh-Hans zh-Hant en-US"`
+	Language string `json:"language" binding:"required,oneof=zh_Hans zh_Hant en_US"`
 }
 
 // 创建项目结构体

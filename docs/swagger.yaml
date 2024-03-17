@@ -280,9 +280,9 @@ definitions:
     properties:
       language:
         enum:
-        - zh-Hans
-        - zh-Hant
-        - en-US
+        - zh_Hans
+        - zh_Hant
+        - en_US
         type: string
       password:
         type: string
@@ -299,9 +299,9 @@ definitions:
         type: string
       language:
         enum:
-        - zh-Hans
-        - zh-Hant
-        - en-US
+        - zh_Hans
+        - zh_Hant
+        - en_US
         type: string
       password:
         type: string

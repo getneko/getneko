@@ -29,3 +29,36 @@ func GetSha256(s string) string {
 	h.Write([]byte(s))
 	return hex.EncodeToString(h.Sum(nil))
 }
+
+// 判断三个切片是否有重复元素(gpt生成，无法确保可用性)
+func HasDuplicate(slice1, slice2, slice3 []string) bool {
+	// 创建一个map来存储切片中的元素
+	elements := make(map[string]bool)
+
+	// 检查第一个切片
+	for i := 0; i < len(slice1); i++ {
+		if elements[slice1[i]] && slice1[i] != "" {
+			return true
+		}
+		elements[slice1[i]] = true
+	}
+
+	// 检查第二个切片
+	for i := 0; i < len(slice2); i++ {
+		if elements[slice2[i]] && slice2[i] != "" {
+			return true
+		}
+		elements[slice2[i]] = true
+	}
+
+	// 检查第三个切片
+	for i := 0; i < len(slice3); i++ {
+		if elements[slice3[i]] && slice3[i] != "" {
+			return true
+		}
+		elements[slice3[i]] = true
+	}
+
+	// 如果没有重复元素，返回false
+	return false
+}
